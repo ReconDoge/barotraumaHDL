@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 tree = ET.parse('chip_collection.xml')
 root = tree.getroot()
 
-'''test'''
 
 class IOBehaviourInterface():
 
@@ -45,8 +44,6 @@ class Chip:
         self.noninteractable = noninteractable
         self.hidden_in_game = hidden_in_game
         self.attributes = None
-        self.input_pins = None
-        self.output_pins = None
 
         self.io_behaviour = IOBehaviourInterface()
 
@@ -56,10 +53,12 @@ class Chip:
     def get_behaviour(self):
         return self.io_behaviour
 
-    def get_input_pins(self):
+    @property
+    def input_pins(self):
         return self.io_behaviour.get_input_pins()
 
-    def get_output_pins(self):
+    @property
+    def output_pins(self):
         return self.io_behaviour.get_output_pins()
 
 
@@ -75,5 +74,5 @@ class BuiltInChip(Chip):
 
 
 c = BuiltInChip("andcomponent")
-print(c.get_input_pins())
-print(c.get_output_pins())
+print(c.input_pins)
+print(c.output_pins)
