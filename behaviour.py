@@ -74,7 +74,3 @@ class Wire:
     def output_end(self, outputs):
         self._output_end = outputs
 
-
-if __name__ == "__main__":
-    c = BuiltInChipBehaviour("andcomponent")
-    print(c.get_chip_element("andcomponent").attrib)
