@@ -1,8 +1,16 @@
 from behaviour import BuiltInChipBehaviour, CustomChipBehaviour, BehaviourInterface
 
+'''A library of chip objects that includes the base chip class, a built in chip class and would probably include
+a custom chip class that would get implemented in the future.
+
+Built in chips are existing logic components in the game that are described within <item> tags in the chip_collection.xml
+file. There would also be a user defined chip that is made up of built-in chips created using the HDL. However, it has
+not been implemented yet'''
+
 
 class Chip:
-
+    '''basic chip class that has an identifier and a bunch of properties that would need to correspond to the
+    attributes in the XML file'''
     def __init__(self, identifier, **kwargs):
         self.identifier = identifier
 
@@ -11,6 +19,7 @@ class Chip:
         self.io_behaviour = BehaviourInterface()
 
     def set_behaviour(self, obj):
+        #sets the chip's behaviour to either a built-in chip or a custom chip
         self.io_behaviour = obj
 
     def get_behaviour(self):
@@ -34,7 +43,8 @@ class BuiltInChip(Chip):
 
 
 class And(BuiltInChip):
-
+    '''Not sure if this approach is a good one because it would require a massive number of classes
+    to implement all of the built-in chips.'''
     _identifier = "andcomponent"
     def __init__(self, **kwargs):
         super().__init__(self._identifier, **kwargs)
