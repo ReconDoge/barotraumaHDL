@@ -1,0 +1,13 @@
+
+CHIP test_chip:
+
+	PROPERTY: 
+		
+	
+	IN: abc, bef, sdljf, sdlfjlkdsjflkjsdlf, skdjlfj324;
+	OUT: out;
+
+	PARTS:
+		And (signal_in1 = a, signal_in2 = b, signal_out = t1, hidden_in_game = False);
+		Not (signal_in = t1, signal_out = t2);
+		Or(signal_in1 = a, signal_in2 = t2, signal_out = out);

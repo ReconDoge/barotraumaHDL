@@ -1,51 +1,14 @@
-import xml.etree.ElementTree as ET
-
-tree = ET.parse('chip_collection.xml')
-root = tree.getroot()
-
-
-class IOBehaviourInterface():
-
-    @staticmethod
-    def get_chip_element(identifier): pass
-
-    def get_input_pins(self): pass
-
-    def get_output_pins(self): pass
-
-
-class CustomChipBehaviour(IOBehaviourInterface):
-    pass
-
-
-class BuiltInChipBehaviour(IOBehaviourInterface):
-
-    def __init__(self, identifier):
-        self.element = self.get_chip_element(identifier)
-        self.connection_panel = self.element.find("ConnectionPanel")
-
-    @staticmethod
-    def get_chip_element(identifier):
-        for item in root.iter("Item"):
-            if item.attrib["identifier"] == identifier:
-                return item
-
-    def get_input_pins(self):
-        return [pin.get("name") for pin in self.connection_panel.findall("input")]
-
-    def get_output_pins(self):
-        return [pin.get("name") for pin in self.connection_panel.findall("output")]
+from behaviour import BuiltInChipBehaviour, CustomChipBehaviour, BehaviourInterface
 
 
 class Chip:
 
-    def __init__(self, identifier, noninteractable=True, hidden_in_game=True):
+    def __init__(self, identifier, **kwargs):
         self.identifier = identifier
-        self.noninteractable = noninteractable
-        self.hidden_in_game = hidden_in_game
-        self.attributes = None
 
-        self.io_behaviour = IOBehaviourInterface()
+        self.properties = kwargs
+
+        self.io_behaviour = BehaviourInterface()
 
     def set_behaviour(self, obj):
         self.io_behaviour = obj
@@ -64,15 +27,26 @@ class Chip:
 
 class BuiltInChip(Chip):
 
-    def __init__(self, identifier, noninteractable=True, hidden_in_game=True):
-        super().__init__(identifier, noninteractable, hidden_in_game)
+    def __init__(self, identifier, **kwargs):
+        super().__init__(identifier, **kwargs)
 
         self.set_behaviour(BuiltInChipBehaviour(self.identifier))
 
-        #self.attributes = self.io_behaviour.get_chip_element(self.identifier).attrib()
+
+class And(BuiltInChip):
+
+    _identifier = "andcomponent"
+    def __init__(self, **kwargs):
+        super().__init__(self._identifier, **kwargs)
 
 
+class Or(BuiltInChip):
 
-c = BuiltInChip("andcomponent")
-print(c.input_pins)
-print(c.output_pins)
+    _identifier = "orcomponent"
+    def __init__(self, **kwargs):
+        super().__init__(self._identifier, **kwargs)
+
+
+if __name__ == "__main__":
+    c = And(id=3, noneinterfactable=True)
+    print(c.properties)
