@@ -15,6 +15,7 @@ class BehaviourInterface():
 
 
 class CustomChipBehaviour(BehaviourInterface):
+    '''Custom chips will have their own XML files, so they will need to be treated differently from built-in chips'''
     
     def __init__(self, identifier):
         pass
