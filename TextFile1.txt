@@ -1,9 +1,6 @@
 
 CHIP test_chip:
 
-	PROPERTY: 
-		
-	
 	IN: abc, bef, sdljf, sdlfjlkdsjflkjsdlf, skdjlfj324;
 	OUT: out;
 
