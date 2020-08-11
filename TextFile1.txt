@@ -1,6 +1,6 @@
 
 CHIP test_chip:
-
+	
 	IN: abc, bef, sdljf, sdlfjlkdsjflkjsdlf, skdjlfj324;
 	OUT: out;
 
