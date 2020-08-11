@@ -49,6 +49,7 @@ class BuiltInChipBehaviour(BehaviourInterface):
 
 
 class Wire:
+    '''Wire is probably what's going to be used to connect each chip, however, I am not sure how to implement it yet'''
 
     def __init__(self, id, hidden_in_game=True, noninteractable=True):
         self.id = id
